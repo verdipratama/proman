@@ -3,7 +3,3 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Live Demo
 
 [http://proman.netlify.com/](http://proman.netlify.com/)
-
-### Todo
-
-- Setup

@@ -1,14 +1,19 @@
-import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import React, { Component } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+
+import Navbar from '../src/components/layout/Navbar';
 
 import * as serviceWorker from './serviceWorker';
 
 export default class App extends Component {
   render() {
     return (
-      <div style={{ textAlign: 'center' }}>
-        <h1>Hello World</h1>
-      </div>
+      <BrowserRouter>
+        <div className="App-wrapper">
+          <Navbar />
+        </div>
+      </BrowserRouter>
     );
   }
 }
