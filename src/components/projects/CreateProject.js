@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { createProject } from '../../store/action';
 
-export default class CreateProject extends Component {
+class CreateProject extends Component {
   state = {
     title: '',
     content: ''
@@ -15,6 +17,8 @@ export default class CreateProject extends Component {
   handleSubmit = e => {
     e.preventDefault();
     console.log(this.state);
+
+    this.props.buatProject(this.state);
     this.setState({
       title: '',
       content: ''
@@ -47,3 +51,15 @@ export default class CreateProject extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    // buatProject adalah props object
+    // arrow function parameter (projectBaru)
+    buatProject: projectBaru => dispatch(createProject(projectBaru))
+  };
+};
+
+// Kenapa null? karena mapDispatchToProps bukan parameter yg pertama
+// parameter pertama adalah mapStateToProps
+export default connect(null, mapDispatchToProps)(CreateProject);

@@ -9,24 +9,29 @@ import Login from '../src/components/auth/Login';
 import Register from '../src/components/auth/Register';
 import CreateProject from '../src/components/projects/CreateProject';
 
+import { Provider } from 'react-redux';
+import store from './store';
+
 import '../src/styles/index.css';
 import * as serviceWorker from './serviceWorker';
 
 export default class App extends Component {
   render() {
     return (
-      <BrowserRouter>
-        <div className="App-wrapper">
-          <Navbar />
-          <Switch>
-            <Route exact path="/" component={Dashboard} />
-            <Route path="/project/:id" component={ProjectDetails} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route path="/create" component={CreateProject} />
-          </Switch>
-        </div>
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <div className="App-wrapper">
+            <Navbar />
+            <Switch>
+              <Route exact path="/" component={Dashboard} />
+              <Route path="/project/:id" component={ProjectDetails} />
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+              <Route path="/create" component={CreateProject} />
+            </Switch>
+          </div>
+        </BrowserRouter>
+      </Provider>
     );
   }
 }

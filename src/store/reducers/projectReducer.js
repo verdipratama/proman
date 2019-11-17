@@ -1,28 +1,4 @@
-const defaultState = {};
-
-export default function reducer(state = defaultState) {
-  return state;
-}
-
-/**
-|--------------------------------------------------
-| Auth Reducer
-|--------------------------------------------------
-*/
-
-const authState = {};
-
-export const authReducer = (state = authState, action) => {
-  return state;
-};
-
-/**
-|--------------------------------------------------
-| Project Reducer
-|--------------------------------------------------
-*/
-
-const projectState = {
+const initState = {
   projects: [
     {
       id: '1',
@@ -42,7 +18,7 @@ const projectState = {
   ]
 };
 
-export const projectReducer = (state = projectState, action) => {
+const projectReducer = (state = initState, action) => {
   switch (action.type) {
     case 'CREATE_PROJECT':
       // action.project dari action.js
@@ -56,3 +32,5 @@ export const projectReducer = (state = projectState, action) => {
       return state;
   }
 };
+
+export default projectReducer;
