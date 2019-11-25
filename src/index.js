@@ -15,22 +15,49 @@ import store from './store';
 import '../src/styles/index.css';
 import * as serviceWorker from './serviceWorker';
 
+/**
+|--------------------------------------------------
+| Syncing Data with Firestore
+|--------------------------------------------------
+*/
+
+import { createFirestoreInstance } from 'redux-firestore';
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
+
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
+
+const rrfConfig = {
+  userProfile: 'users',
+  useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
+};
+
+const rrfProps = {
+  firebase,
+  config: rrfConfig,
+  dispatch: store.dispatch,
+  createFirestoreInstance // <- needed if using firestore
+};
+
 export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <BrowserRouter>
-          <div className="App-wrapper">
-            <Navbar />
-            <Switch>
-              <Route exact path="/" component={Dashboard} />
-              <Route path="/project/:id" component={ProjectDetails} />
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
-              <Route path="/create" component={CreateProject} />
-            </Switch>
-          </div>
-        </BrowserRouter>
+        <ReactReduxFirebaseProvider {...rrfProps}>
+          <BrowserRouter>
+            <div className="App-wrapper">
+              <Navbar />
+              <Switch>
+                <Route exact path="/" component={Dashboard} />
+                <Route path="/project/:id" component={ProjectDetails} />
+                <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
+                <Route path="/create" component={CreateProject} />
+              </Switch>
+            </div>
+          </BrowserRouter>
+        </ReactReduxFirebaseProvider>
       </Provider>
     );
   }

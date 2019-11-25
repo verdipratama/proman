@@ -1,22 +1,33 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import pic from '../../assets/images/pic.jpeg';
+import { connect } from 'react-redux';
+import { logOut } from '../../store/action';
 
-const SignedInLinks = () => {
+const SignedInLinks = props => {
   return (
     <ul className="right">
       <li>
         <NavLink to="/create">New Project</NavLink>
       </li>
       <li>
-        <NavLink to="/">Log Out</NavLink>
+        <a onClick={props.logOut} href="/">
+          Logout
+        </a>
       </li>
       <li>
         <NavLink to="/" className="btn btn-floating pink lighten-1">
-          PM
+          <img src={pic} alt="profile" style={{ display: 'block', width: '40px' }} />
         </NavLink>
       </li>
     </ul>
   );
 };
 
-export default SignedInLinks;
+const mapDispatchToProps = dispatch => {
+  return {
+    logOut: () => dispatch(logOut())
+  };
+};
+
+export default connect(null, mapDispatchToProps)(SignedInLinks);

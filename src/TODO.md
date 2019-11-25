@@ -75,7 +75,75 @@
 3. Choose cloud firestore and start in test mode
 4. Add collection projects -> title -> content
 
-## Connecting Redux to Firebase
+## Part 11 Connecting Redux to Firebase
 
-- [x] install -> yarn add react-redux-firebase redux-firestore
-- [x]
+- [x] install -> yarn add react-redux-firebase redux-firestore (binding to database) it's mean using this library is to using firebase API inside action creator and sync our database to react store.
+- [x] Setup store.js
+- [x] import { getFirebase }, { reduxFirestore, getFirestore }
+- [x] compose (compose sama aja seperti combine) and appy middleware thunk.withExtraArgument call getFirebase, getFirestore to allow in (action.js)
+- [x] call reduxFirestore(FBConfig)
+
+- [x] 2019 UPDATE 3RD LIBRARY
+- [x] Edit index.js and add all configuration [Syncing Data with Firestore]
+- [x] wrap ReactReduxFirebaseProvider {...rrfProps}
+
+## Part 12 Adding Data to Firestore
+
+- [x] Setup action.js and create getFirebase, getFirestore object
+- [x] Create getFirestore();
+- [x] Setup firestore API .collection().add()
+- [x] Setup reducer.js to handle action CREATE_PROJECT, CREATE_PROJECT_ERROR
+
+## Part 13 Syncing / Show Data with Firestore
+
+- [x] Setup index.js (store) import firestoreReducer and configure firestore property inside rootReducer
+- [x] Setup Dashboard.js to show data from firebase
+- [x] import {firestoreConnect} and compose
+- [x] Configure mapStateToProps and export default
+
+## Part 14 Project Details Data
+
+- [x] Import {Link} and wrap at projectlist.js
+- [x] Import {connect, firestoreconnect, compose} at projectdetails.js
+- [x] First setup export default -> config mapStateToProps
+
+## Part 15 Firebase Auth
+
+- [x] Setup firebase authentification in firebase console
+- [x] Open Authentication in firebase.com
+- [x] Setup Email/Password
+- [x] SETUP FIREBASE AUTH IN REDUX
+- [x] Import firebaseReducer at index.js/reducer
+- [x] Add property firebase to rootReducer({object})
+
+## Part 16 Setup Login User
+
+- [x] Create action creator for logIn at action.js
+- [x] Config authReducer in reducer.js
+- [x] Switch case LOGIN_ERROR and LOGIN_SUCCESS
+- [x] Setup Login.js and import {connect} and { logIn }
+- [x] Edit export default connect(mapstate, mapdispatch)
+- [x] Setup mapdispatch first
+- [x] Setup this.props.logIn(this.state);
+- [x] Setup mapstate to show error
+- [x] Setup authError props
+
+## Part 17 Setup Logout
+
+- [x] Create action creator for logOut at action.js
+- [x] Add 'SIGNOUT_SUCCESS' at reducer.js
+- [x] Setup SignedInLinks.js to setup logout
+- [x] Setup Login.js and import {connect} and { logOut }
+- [x] Setup mapDispatchToProps
+- [x] IF DONT HAVE MAPSTATETOPROPS ADD (NULL) FIRST
+
+## Part 18 Setup Navbar Login / logout Status
+
+- [x] Setup Navbar.js and import {connect}
+- [x] add mapStateToProps
+- [x] Setup const {auth} form firebase property
+- [x] Check console AND USE UUID from firebase object
+
+## Part 19 Routing Guarding / Show Login URL First
+
+- [x] Next ......

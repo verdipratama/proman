@@ -1,5 +1,6 @@
 import React from 'react';
 import ProjectSummary from './ProjectSummary';
+import { Link } from 'react-router-dom';
 
 const ProjectList = ({ projectlist }) => {
   return (
@@ -9,9 +10,11 @@ const ProjectList = ({ projectlist }) => {
       {projectlist &&
         projectlist.map(showPro => {
           return (
-            // prosum property untuk parameter di projectsummary
-            // property tidak boleh huruf kecilbesar
-            <ProjectSummary prosum={showPro} key={showPro.id} />
+            <Link to={`/project/${showPro.id}`} key={showPro.id}>
+              {/* // prosum property untuk parameter di projectsummary
+            // property tidak boleh huruf kecilbesar */}
+              <ProjectSummary prosum={showPro} />
+            </Link>
           );
         })}
     </div>

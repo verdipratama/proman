@@ -1,33 +1,67 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 
-export default class ProjectDetails extends Component {
-  render() {
-    const id = this.props.match.params.id;
-    console.log(this.props);
+import Routing from '../auth/Routing';
 
+const ProjectDetails = props => {
+  console.log(props);
+  const { project } = props;
+
+  // Menggunakan condition ifelse
+  // harus sama nama {project} property yang ada di mapStateToProps
+  // kalo tidak sama akan NOT FOUND
+  if (project) {
     return (
-      <div className="container section project-details">
-        <div className="card z-depth-0">
-          <div className="card-content">
-            <span className="card-title">Project Details - {id}</span>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quis harum non,
-              eligendi rem laudantium corporis distinctio modi tempora assumenda animi minima earum
-              amet soluta aperiam quo at error expedita! Lorem ipsum dolor sit amet consectetur,
-              adipisicing elit. Mollitia dicta necessitatibus ex voluptas voluptatem sequi accusamus
-              tempora quisquam cumque adipisci culpa ad corrupti, consectetur officia porro quas
-              harum odio atque?
-            </p>
-            <div className="section center">
-              <button className="btn red">Delete Post</button>
+      <Routing>
+        <div className="container section project-details" style={{ marginTop: '40px' }}>
+          <div className="card z-depth-0">
+            <div className="card-content">
+              <span className="card-title">{project.title}</span>
+              <hr />
+              <p>{project.content}</p>
+              <div className="section center">
+                <button className="btn red">Delete Post</button>
+              </div>
+            </div>
+            <div className="card-action gret lighten-4 grey-text">
+              <div>
+                Post by {project.authorFirstName} {project.authorLastName}
+              </div>
+              <div>{new Date().toDateString().slice(0, 10)}</div>
             </div>
           </div>
-          <div className="card-action gret lighten-4 grey-text">
-            <div>Post by Proman</div>
-            <div>{new Date().toDateString().slice(0, 10)}</div>
-          </div>
         </div>
-      </div>
+      </Routing>
+    );
+  } else {
+    return (
+      <Routing>
+        <div className="container center">
+          <p style={{ color: 'white', fontSize: '50px' }}>NOT FOUND!!!</p>
+        </div>
+      </Routing>
     );
   }
-}
+};
+
+const mapStateToProps = (state, ownProps) => {
+  console.log(state);
+
+  // mendapatkan indivual parameter id
+  const id = ownProps.match.params.id;
+
+  return {
+    // untuk mengetahui ini silahakan clog()
+    project: state.firestore.data.projects && state.firestore.data.projects[id]
+  };
+};
+
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect(props => {
+    // @ts-ignore
+    return [{ collection: 'projects', doc: props.match.params.id }];
+  })
+)(ProjectDetails);

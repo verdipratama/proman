@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createProject } from '../../store/action';
 
+import Routing from '../auth/Routing';
+
 class CreateProject extends Component {
   state = {
     title: '',
@@ -27,27 +29,29 @@ class CreateProject extends Component {
 
   render() {
     return (
-      <div className="container">
-        <form onSubmit={this.handleSubmit} className="white">
-          <h5 className="grey-text text-darken-3">Create new Project</h5>
-          <div className="input-field">
-            <label htmlFor="title">Title</label>
-            <input type="text" id="title" onChange={this.handleChange} value={this.state.title} />
-          </div>
-          <div className="input-field">
-            <label htmlFor="content">Project Content</label>
-            <textarea
-              id="content"
-              className="materialize-textarea"
-              onChange={this.handleChange}
-              value={this.state.content}
-            ></textarea>
-          </div>
-          <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">Create</button>
-          </div>
-        </form>
-      </div>
+      <Routing>
+        <div className="container">
+          <form onSubmit={this.handleSubmit} className="white">
+            <h5 className="grey-text text-darken-3">Create Project</h5>
+            <div className="input-field">
+              <label htmlFor="title">Title</label>
+              <input type="text" id="title" onChange={this.handleChange} value={this.state.title} />
+            </div>
+            <div className="input-field">
+              <label htmlFor="content">Project Content</label>
+              <textarea
+                id="content"
+                className="materialize-textarea"
+                onChange={this.handleChange}
+                value={this.state.content}
+              ></textarea>
+            </div>
+            <div className="input-field">
+              <button className="btn pink lighten-1 z-depth-0">Create</button>
+            </div>
+          </form>
+        </div>
+      </Routing>
     );
   }
 }
@@ -55,8 +59,8 @@ class CreateProject extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     // buatProject adalah props object
-    // arrow function parameter (projectBaru)
-    buatProject: projectBaru => dispatch(createProject(projectBaru))
+    // arrow function parameter (project) adalah untuk parameter di action.js
+    buatProject: project => dispatch(createProject(project))
   };
 };
 
