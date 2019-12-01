@@ -21,6 +21,7 @@ class CreateProject extends Component {
     console.log(this.state);
 
     this.props.buatProject(this.state);
+    this.props.history.push('/');
     this.setState({
       title: '',
       content: ''

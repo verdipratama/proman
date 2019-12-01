@@ -9,6 +9,10 @@ export function createProject(project) {
     // Async call to database
     const firestore = getFirestore();
 
+    // Menambahkan ini agar tau nama yang ngepost
+    const profile = getState().firebase.profile;
+    const authorId = getState().firebase.auth.uid;
+
     firestore
       .collection('projects')
       .add({
@@ -16,9 +20,9 @@ export function createProject(project) {
         // ...project dari parameter
         // dan dari state CrateProject.js
         ...project,
-        authorFirstName: 'Proman',
-        authorLastName: 'Master',
-        authorId: 123,
+        authorFirstName: profile.firstName,
+        authorLastName: profile.lastName,
+        authorId: authorId,
         createdAt: new Date()
       })
       // callback function untuk submit project
