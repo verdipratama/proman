@@ -5,13 +5,13 @@ import SignedOutLinks from './SignedOutLinks';
 import { connect } from 'react-redux';
 
 const Navbar = props => {
-  const { auth } = props;
+  const { auth, profile } = props;
   console.log(auth);
 
   // uuid dari object firebase
   // jika ada uuid arahkan ke signedInLinks
   // jika tidak ada uuid arahkan ke SignedOutLinks
-  const navigation = auth.uid ? <SignedInLinks /> : <SignedOutLinks />;
+  const navigation = auth.uid ? <SignedInLinks profile={profile} /> : <SignedOutLinks />;
 
   return (
     <nav className="nav wrapper">
@@ -32,10 +32,12 @@ const Navbar = props => {
 };
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
     // AUTH adalah property
     // firebase adalah object yang auth ada di index.js store
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    profile: state.firebase.profile
   };
 };
 

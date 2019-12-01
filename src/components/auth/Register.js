@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
+import { register } from '../../store/action';
+
 class Register extends Component {
   state = {
     email: '',
@@ -19,7 +21,8 @@ class Register extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.regist(this.state);
+
     this.setState({
       email: '',
       password: '',
@@ -29,7 +32,7 @@ class Register extends Component {
   };
 
   render() {
-    const { auth } = this.props;
+    const { auth, authError } = this.props;
     if (auth.uid) return <Redirect to="/" />;
 
     return (
@@ -68,7 +71,11 @@ class Register extends Component {
             />
           </div>
           <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">Login</button>
+            <button className="btn pink lighten-1 z-depth-0">Register</button>
+            <div className="red-text center">
+              {/*jika error tampilkan state error dan jika tidak error = null, */}
+              {authError ? <p>{authError}</p> : null}
+            </div>
           </div>
         </form>
       </div>
@@ -78,8 +85,15 @@ class Register extends Component {
 
 const mapStateToProps = state => {
   return {
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    authError: state.auth.authError
   };
 };
 
-export default connect(mapStateToProps)(Register);
+const mapDispatchToProps = dispatch => {
+  return {
+    regist: newUser => dispatch(register(newUser))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

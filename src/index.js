@@ -30,7 +30,8 @@ import 'firebase/auth';
 
 const rrfConfig = {
   userProfile: 'users',
-  useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
+  useFirestoreForProfile: true, // Firestore for Profile instead of Realtime DB
+  attachAuthIsReady: true
 };
 
 const rrfProps = {

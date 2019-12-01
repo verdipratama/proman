@@ -144,6 +144,15 @@
 - [x] Setup const {auth} form firebase property
 - [x] Check console AND USE UUID from firebase object
 
-## Part 19 Routing Guarding / Show Login URL First
+## Part 19 Routing Guarding / Protecting Route
 
-- [x] Next ......
+- [x] Create Routing.js with (HOC) for ...
+- [x] Protect Dashboard.js
+- [x] Protect CreateProject.js
+- [x] Protect ProjectDetails.js
+- [x] Protect Login.js auth: state.firebase.auth in mapStateToProps and destructing auth and then check if not uid redirect
+- [x] Protect Register.js auth: state.firebase.auth in mapStateToProps and destructing auth and then check if not uid redirect.
+
+## Part 20 User Register (Firebase Auth) and User Profile Data
+
+- [x]
